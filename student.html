@@ -68,9 +68,6 @@
       cursor: pointer;
       margin-left: 10px;
     }
-    .cancel {
-      background: #f3f4f6;
-    }
     .save {
       background: #111827;
       color: white;
@@ -130,7 +127,8 @@
   <div class="sidebar">
     <h2>EduManage</h2>
     <ul class="menu">
-      <a  style="color: rgb(0, 0, 0); padding: 10px 20px; border-radius: 10px; text-decoration: none;" href="faculty.html">&nbsp;Student</a>
+      <a  style="color: rgb(0, 0, 0); padding: 10px 20px; border-radius: 10px; text-decoration: none;flex: 1;
+      padding: 20px 40px;" href="faculty.html">&nbsp;Student</a>
       <br><br>
       <li class="active">Add Student</li>
     </ul>
@@ -148,7 +146,7 @@
     <div class="header">
       <h1>Add New Student</h1>
       <div class="actions">
-        <button class="cancel">Cancel</button>
+        <a style="    background: #bfbfbf;position: relative;top: 2px;color: rgb(0, 0, 0);padding: 7px 16px;cursor: pointer;color: #333;border-radius: 5px;text-decoration: none;" href="faculty.html">Cancel</a>
         <button class="save">Save Student</button>
       </div>
     </div>
@@ -156,7 +154,51 @@
     <!-- Profile Picture -->
     <div class="form-section">
       <h3>Profile Picture</h3>
-      <input type="text" placeholder="Profile Image URL">
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Button</title>
+  <style>
+    .upload-btn {
+      display: inline-block;
+      background-color: #28a745; /* green */
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .upload-btn:hover {
+      background-color: #218838; /* darker green */
+    }
+
+    /* Hide the real file input */
+    input[type="file"] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <form>
+    <label for="file-upload" class="upload-btn">Upload</label>
+    <input id="file-upload" type="file" />
+  </form>
+
+  <script>
+    document.getElementById("file-upload").addEventListener("change", function() {
+      if (this.files.length > 0) {
+        alert("You selected: " + this.files[0].name);
+      }
+    });
+  </script>
+</body>
+</html>
+
     </div>
 
     <!-- Basic Info -->
