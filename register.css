@@ -13,7 +13,7 @@ body {
       justify-content: center;
       align-items: center;
       background: #e0f2fe;
-      position: relative;
+      position: center;
     }
 
     .left img {
