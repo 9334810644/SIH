@@ -1,0 +1,197 @@
+body {
+     font-family: "Exo 2", sans-serif;
+    margin: 0;
+    background: #f8fafc;
+    color: #1e293b;
+}
+
+ul li {
+    text-decoration: none;
+    list-style: none;
+}
+
+/* Navbar */
+header {
+    background: #1e3a8a;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 40px;
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+header nav a {
+    margin: 0 12px;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+header nav a:hover {
+    text-decoration: underline;
+}
+
+.btn-login,
+.btn-signup {
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-login {
+    background: white;
+    color: #1e3a8a;
+    margin-right: 10px;
+}
+
+.btn-signup {
+    background: #2563eb;
+    color: white;
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px 80px;
+    background-image: url("imgs and vids/4th.jpg");
+    background-size: cover;
+    height: 75.9vh;
+}
+
+.hero-text h1 {
+    font-size: 3.0rem;
+    font-weight: bold;
+    margin-bottom: 70px;
+}
+
+.hero-text button {
+    margin-right: 10px;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-register {
+    background: #22c55e;
+    color: white;
+    padding: 13px 29px;
+    border-radius: 11px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+a{
+    text-decoration: none;
+}
+
+.btn-register:hover {
+    background: #16a34a;
+    cursor: pointer;
+}
+
+.btn-plain {
+    color: #1e3a8a;
+    font-weight: bolder;
+    background: #f1f5f9;
+    padding: 13px 29px;
+    border-radius: 11px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.btn-plain:hover {
+    background: #c0c0c0;
+}
+
+/* Profile Card */
+.profile-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    width: 350px;
+}
+
+.profile-card img {
+    width: 102px;
+    border-radius: 23%;
+    margin-bottom: 10px;
+}
+
+.pic{
+    display: flex;
+}
+
+.profile-card h2 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.profile-card small {
+    color: #475569;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.stat-box {
+    text-align: center;
+}
+
+.stat-box h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #1e3a8a;
+}
+
+.stat-box p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #475569;
+}
+
+.profiledemo {
+    display: flex;
+    justify-content: center;
+}
+
+.upload-btn {
+    font-weight: 900;
+    font-size: 14px;
+    /* display: block; */
+    /* margin: 7px auto 0; */
+    padding: 8px 20px;
+    background: #22c55e;
+    color: white;
+    /* border: none; */
+    border-radius: 6px;
+    /* cursor: pointer; */
+}
+
+.upload-btn:hover {
+    background: #16a34a;
+}
+
+.quick-stats {
+    padding: 30px 80px;
+    font-weight: bold;
+    font-size: 20px;
+}

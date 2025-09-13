@@ -1,27 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Management Dashboard</title>
-  <link rel="stylesheet" href="faculty.css">
-</head>
+  <title>Add New Student</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f9fafb;
+      display: flex;
+    }
 
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      background: #fff;
+      height: 100vh;
+      border-right: 1px solid #e5e7eb;
+      padding: 20px 0;
+    }
+    .sidebar h2 {
+      font-size: 20px;
+      margin-left: 20px;
+      margin-bottom: 30px;
+    }
+    .menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .menu li {
+      padding: 12px 20px;
+      cursor: pointer;
+      color: #333;
+    }
+    .menu li.active {
+      background: #f1f5f9;
+      border-left: 4px solid #2563eb;
+      font-weight: bold;
+    }
+    .menu li:hover {
+      background: #f1f5f9;
+    }
+
+    /* Main content */
+    .main {
+      flex: 1;
+      padding: 20px 40px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      font-size: 22px;
+    }
+
+    .header .actions button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    .save {
+      background: #111827;
+      color: white;
+    }
+
+    /* Form Sections */
+    .form-section {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .form-section h3 {
+      margin-bottom: 15px;
+      font-size: 18px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 8px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 15px;
+    }
+
+    .form-group input, 
+    .form-group select {
+      flex: 1;
+      min-width: 200px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 14px;
+    }
+
+  </style>
+</head>
 <body>
 
   <!-- Sidebar -->
   <div class="sidebar">
-    <div class="home" style="display: flex;justify-content: center; align-items: center;">
-      
-      <a style="color: rgb(0, 0, 0);font-weight: bold; padding: 10px 20px; text-decoration: none;"href="index.html">&nbsp;Home</a>
-    </div>
-    <br><br>
+    <h2>EduManage</h2>
     <ul class="menu">
-      <li class="active">Students</li>
-      <br>
-      <a style="color: rgb(0, 0, 0); padding: 10px 20px; border-radius: 10px; text-decoration: none;"
-        href="student.html">Add Student</a>
+      <a  style="color: rgb(0, 0, 0); padding: 10px 20px; border-radius: 10px; text-decoration: none;flex: 1;
+      padding: 20px 40px;" href="StudentManagement.html">&nbsp;Student</a>
+      <br><br>
+      <li class="active">Add Student</li>
     </ul>
     <h4 style="margin-left:20px; margin-top:30px;">Tools</h4>
     <ul class="menu">
@@ -31,48 +140,153 @@
     </ul>
   </div>
 
-  <!-- Main -->
+  <!-- Main Content -->
   <div class="main">
+    <!-- Header -->
     <div class="header">
-      <h1>Student Management</h1>
-      <a style="color: white; padding: 10px 20px; background-color: rgb(0, 0, 0); border-radius: 10px; text-decoration: none; font-weight: bolder; "
-        href="student.html"> +&nbsp;&nbsp;&nbsp;Add Student</a>
+      <h1>Add New Student</h1>
+      <div class="actions">
+        <a style="    background: #bfbfbf;position: relative;top: 2px;color: rgb(0, 0, 0);padding: 7px 16px;cursor: pointer;color: #333;border-radius: 5px;text-decoration: none;" href="faculty.html">Cancel</a>
+        <button class="save">Save Student</button>
+      </div>
     </div>
 
-    <div class="filters">
-      <input type="text" id="search" placeholder="Search students...">
-      <div>
+    <!-- Profile Picture -->
+    <div class="form-section">
+      <h3>Profile Picture</h3>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Button</title>
+  <style>
+    .upload-btn {
+      display: inline-block;
+      background-color: #28a745; /* green */
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .upload-btn:hover {
+      background-color: #218838; /* darker green */
+    }
+
+    /* Hide the real file input */
+    input[type="file"] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <form>
+    <label for="file-upload" class="upload-btn">Upload</label>
+    <input id="file-upload" type="file" />
+  </form>
+
+  <script>
+    document.getElementById("file-upload").addEventListener("change", function() {
+      if (this.files.length > 0) {
+        alert("You selected: " + this.files[0].name);
+      }
+    });
+  </script>
+</body>
+</html>
+
+    </div>
+
+    <!-- Basic Info -->
+    <div class="form-section">
+      <h3>Basic Information</h3>
+      <div class="form-group">
+        <input type="text" placeholder="First Name *">
+        <input type="text" placeholder="Last Name *">
+      </div>
+      <div class="form-group">
+        <input type="email" placeholder="Email Address *">
+        <input type="text" placeholder="Phone Number *">
+      </div>
+      <div class="form-group">
+        <input type="date" placeholder="Date of Birth">
         <select>
-          <option>All Grades</option>
+          <option>Select grade</option>
           <option>11th Grade</option>
           <option>12th Grade</option>
         </select>
+      </div>
+      <div class="form-group">
+        <input type="number" placeholder="GPA">
         <select>
-          <option>All Status</option>
+          <option>Status</option>
           <option>Active</option>
           <option>Inactive</option>
         </select>
       </div>
     </div>
-    <script>
-      // Simple Search Functionality
-      const searchInput = document.getElementById("search");
-      const studentList = document.getElementById("studentList");
-      const students = studentList.getElementsByClassName("card");
 
-      searchInput.addEventListener("keyup", function () {
-        let filter = searchInput.value.toLowerCase();
-        for (let i = 0; i < students.length; i++) {
-          let name = students[i].getElementsByTagName("h3")[0];
-          if (name.innerText.toLowerCase().indexOf(filter) > -1) {
-            students[i].style.display = "";
-          } else {
-            students[i].style.display = "none";
-          }
-        }
-      });
-    </script>
+    <!-- Contact Info -->
+    <div class="form-section">
+      <h3>Contact Information</h3>
+      <div class="form-group">
+        <input type="text" placeholder="Address *" style="flex:100%;">
+      </div>
+      <div class="form-group">
+        <input type="text" placeholder="Emergency Contact (Name - Phone)">
+      </div>
+      <div class="form-group">
+        <input type="date" value="2025-09-12">
+      </div>
+    </div>
+
+    <!-- Subjects -->
+    <div class="form-section">
+      <h3>Subjects</h3>
+      <div class="checkbox-group">
+        <label><input type="checkbox"> Mathematics</label>
+        <label><input type="checkbox"> Physics</label>
+        <label><input type="checkbox"> Chemistry</label>
+        <label><input type="checkbox"> Biology</label>
+        <label><input type="checkbox"> English Literature</label>
+        <label><input type="checkbox"> History</label>
+        <label><input type="checkbox"> Geography</label>
+        <label><input type="checkbox"> Computer Science</label>
+        <label><input type="checkbox"> Art</label>
+        <label><input type="checkbox"> Music</label>
+        <label><input type="checkbox"> Physical Education</label>
+        <label><input type="checkbox"> Spanish</label>
+        <label><input type="checkbox"> French</label>
+        <label><input type="checkbox"> Economics</label>
+      </div>
+    </div>
+
+    <!-- Activities -->
+    <div class="form-section">
+      <h3>Extracurricular Activities</h3>
+      <div class="checkbox-group">
+        <label><input type="checkbox"> Student Council</label>
+        <label><input type="checkbox"> Science Club</label>
+        <label><input type="checkbox"> Debate Team</label>
+        <label><input type="checkbox"> Robotics Club</label>
+        <label><input type="checkbox"> Chess Club</label>
+        <label><input type="checkbox"> Basketball Team</label>
+        <label><input type="checkbox"> Soccer Team</label>
+        <label><input type="checkbox"> Volleyball Team</label>
+        <label><input type="checkbox"> Drama Club</label>
+        <label><input type="checkbox"> Band</label>
+        <label><input type="checkbox"> National Honor Society</label>
+        <label><input type="checkbox"> Math Olympiad</label>
+        <label><input type="checkbox"> Coding Club</label>
+        <label><input type="checkbox"> Model UN</label>
+        <label><input type="checkbox"> Newspaper Club</label>
+      </div>
+    </div>
+  </div>
 
 </body>
-
 </html>
