@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - Student Activity Portal</title>
   <link rel="stylesheet" href="login.css">
-
 </head>
 <body>
   <div class="login-container">
@@ -13,8 +12,8 @@
     <p>Login to your Student Activity Portal</p>
 
     <form id="loginForm">
-      <input type="email" placeholder="Enter your Email" required>
-      <input type="password" placeholder="Enter your Password" required>
+      <input type="email" id="email" placeholder="Enter your Email" required>
+      <input type="password" id="password" placeholder="Enter your Password" required>
       <button type="submit" class="btn-login">Login</button>
     </form>
 
@@ -24,11 +23,47 @@
     </div>
   </div>
 
-  <script>
-    document.getElementById("loginForm").addEventListener("submit", function(e){
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js" type="module"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js" type="module"></script>
+
+  <!-- Firebase Login Script -->
+  <script type="module">
+    // Import Firebase functions
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    // Your Firebase Config (replace with your project config from Firebase Console)
+    const firebaseConfig = {
+  apiKey: "AIzaSyA9C1j6rc8QicmusZ3_tTlCMxfnqaXuYrg",
+  authDomain: "hackathon-24389.firebaseapp.com",
+  projectId: "hackathon-24389",
+  storageBucket: "hackathon-24389.firebasestorage.app",
+  messagingSenderId: "223352153020",
+  appId: "1:223352153020:web:4033ee61bbd488830e81b9",
+  measurementId: "G-LVG5GVVE91"
+};
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Handle login
+    const loginForm = document.getElementById("loginForm");
+    loginForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      alert("Login successful! Redirecting to Dashboard...");
-      window.location.href = "index.html"; // goes back to the dashboard
+
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          alert("✅ Login Successful! Redirecting...");
+          window.location.href = "faculty.html"; // Dashboard
+        })
+        .catch((error) => {
+          alert("❌ Error: " + error.message);
+        });
     });
   </script>
 </body>

@@ -5,37 +5,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Create Account</title>
   <link rel="stylesheet" href="register.css">
-
 </head>
 <body>
-  <!-- Left Section with Balloon -->
- 
-
-  <!-- Right Section with Form -->
   <div class="right">
     <div class="form-container">
       <h2>Create your Free Account</h2>
-      <input type="text" placeholder="Enter your Full Name here">
-      <input type="email" placeholder="Enter your Email here">
-      <input type="password" placeholder="Enter your Password here">
+
+      <input type="text" id="fullname" placeholder="Enter your Full Name here" required>
+      <input type="email" id="email" placeholder="Enter your Email here" required>
+      <input type="password" id="password" placeholder="Enter your Password here" required>
       <button class="btn-create">Create Account</button>
 
       <p>Already have an account? <a href="login.html">Log in</a></p>
-      <div class="divider">— OR —</div>
-
-      <div class="social-btns">
-        <button><img src="https://img.icons8.com/color/48/000000/google-logo.png"> Google</button>
-        <button><img src="https://img.icons8.com/ios-glyphs/30/000000/github.png"> GitHub</button>
-      </div>
-
-      <footer>Reserved directs to Leo Barreto</footer>
     </div>
   </div>
 
-  <!-- JS -->
-  <script>
-    document.querySelector(".btn-create").addEventListener("click", () => {
-      alert("Account Created Successfully!");
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js" type="module"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js" type="module"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js" type="module"></script>
+
+  <!-- Firebase Register Script -->
+  <script type="module">
+    // Import Firebase functions
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    // Your Firebase Config (replace with your project config from Firebase Console)
+    const firebaseConfig = {
+  apiKey: "AIzaSyA9C1j6rc8QicmusZ3_tTlCMxfnqaXuYrg",
+  authDomain: "hackathon-24389.firebaseapp.com",
+  projectId: "hackathon-24389",
+  storageBucket: "hackathon-24389.firebasestorage.app",
+  messagingSenderId: "223352153020",
+  appId: "1:223352153020:web:4033ee61bbd488830e81b9",
+  measurementId: "G-LVG5GVVE91"
+};
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Handle Email/Password Signup
+    document.querySelector(".btn-create").addEventListener("click", async () => {
+      const fullname = document.getElementById("fullname").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        // Save extra user info in Firestore
+        await setDoc(doc(db, "users", user.uid), {
+          fullname: fullname,
+          email: email,
+          createdAt: new Date()
+        });
+
+        alert("✅ Account Created Successfully! Please log in.");
+        window.location.href = "login.html";
+      } catch (error) {
+        alert("❌ Error: " + error.message);
+      }
     });
   </script>
 </body>
