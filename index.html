@@ -6,9 +6,8 @@
   <title>Student Activity Portal</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Libertinus+Mono&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Libertinus+Mono&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -21,11 +20,11 @@
       </a>
     </div>
     <nav>
-      <a href="register.html">Students</a>
-      <a href="register.html">Faculty</a>
-      <a href="register.html">Activities</a>
-      <a href="register.html">Reports</a>
-      <a href="register.html">Admin</a>
+      <a href="login.html">Students</a>
+      <a href="login.html">Faculty</a>
+      <a href="login.html">Activities</a>
+      <a href="login.html">Reports</a>
+      <a href="login.html">Profile</a>
     </nav>
     <div>
       <a class="btn-login" href="login.html">Login</a>
@@ -35,50 +34,43 @@
 
   <!-- Hero Section -->
   <section class="hero">
+    <!-- Left side text -->
     <div class="hero-text">
       <h1 style="color: rgb(0, 0, 0);">One Platform for<br>All Types of Student <br> Activities</h1>
-      <a class="btn-register" href="register.html
-      ">Register Now</a>
+      <a class="btn-register" href="register.html">Register Now</a>
       <a class="btn-plain" href="login.html">Login</a>
     </div>
 
-    <!-- <div class="profile-card">
-      <h2>Welcome, <b>John Doe!</b></h2>
-      <div class="pic">
-        <img src="imgs and vids/605b9b86a82dd0147ed8aa612381326f.jpg" alt="profile">
+    <!-- Right side Features -->
+    <div class="features-compact">
+      <h2>Key Features</h2>
       <ul>
-        <li><p><small>Roll no: 123495188</small></p></li>
-      <li><p><small>Department: Computer Science</small></p></li>
-      <li><p><small>Year: 2nd year</small></p></li>
+        <li><b>Dynamic Student Dashboard:</b> Real-time updates on performance & attendance.</li>
+        <li><b>Activity Tracker:</b> Upload and validate seminars, internships, online courses.</li>
+        <li><b>Faculty Approval:</b> Verified records for credibility.</li>
+        <li><b>Digital Portfolio:</b> Auto-generated, shareable PDF or web link.</li>
+        <li><b>Analytics & Reporting:</b> Reports for NAAC, AICTE, NIRF, internal use.</li>
+        <li><b>Integration Support:</b> Works with LMS, ERP & other platforms.</li>
       </ul>
-      </div>
-
-      <div class="stats">
-        <div class="stat-box">
-          <h3>1,254</h3>
-          <p>Students</p>
-        </div>
-        <div class="stat-box">
-          <h3>326</h3>
-          <p>Events</p>
-        </div>
-        <div class="stat-box">
-          <h3>1,560</h3>
-          <p>Certifications</p>
-        </div>
-        <div class="stat-box">
-          <h3>5,832</h3>
-          <p>Hours</p>
-        </div>
-      </div>
-    </div> -->
+    </div>
   </section>
 
-  
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Govt. of Jammu & Kashmir | Student Activity Portal</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="login.html">Students</a>
+      <a href="login.html">Faculty</a>
+      <a href="login.html">Reports</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </footer>
+
   <!-- Example JavaScript -->
   <script>
-    document.querySelector(".upload-btn").addEventListener("click", () => {
-      alert("Upload a clicked!");
+    document.querySelector(".upload-btn")?.addEventListener("click", () => {
+      alert("Upload clicked!");
     });
   </script>
 

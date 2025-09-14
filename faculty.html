@@ -118,17 +118,15 @@
       gap: 5px;
       font-size: 14px;
     }
-
   </style>
 </head>
 <header>
-
   <nav style="width: 100vw; background: #111827; color: #fff; padding: 0 0 0 0; height: 60px; display: flex; align-items: center; position: fixed; top: 0; left: 0; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
     <div style="display: flex; align-items: center; height: 100%; width: 100%; max-width: 1400px; margin: 0 auto;">
       <img src="imgs and vids/logo.svg" alt="Logo" style="height: 38px; margin-left: 30px; margin-right: 18px;">
       <span style="font-size: 22px; font-weight: bold; letter-spacing: 1px;">EduManage</span>
       <div style="margin-left: auto; display: flex; align-items: center; gap: 30px; margin-right: 40px;">
-        <a href="index.html" style="color: #fff; text-decoration: none; font-size: 16px; padding: 8px 12px; border-radius: 5px; transition: background 0.2s;">Home</a>
+        <a href="home.html" style="color: #fff; text-decoration: none; font-size: 16px; padding: 8px 12px; border-radius: 5px; transition: background 0.2s;">Home</a>
         <a href="StudentManagement.html" style="color: #fff; text-decoration: none; font-size: 16px; padding: 8px 12px; border-radius: 5px; transition: background 0.2s;">Students</a>
         <a href="faculty.html" style="color: #fff; text-decoration: none; font-size: 16px; padding: 8px 12px; border-radius: 5px; transition: background 0.2s;">Faculty</a>
         <a href="login.html" style="color: #fff; text-decoration: none; font-size: 16px; padding: 8px 12px; border-radius: 5px; transition: background 0.2s;">Logout</a>
@@ -138,14 +136,13 @@
 </header>
 <body>
 
-  <!-- Navbar -->
-
   <div style="height: 60px;"></div> <!-- Spacer for fixed navbar -->
+
   <!-- Sidebar -->
   <div class="sidebar">
     <h2>EduManage</h2>
     <ul class="menu">
-      <a  style="color: rgb(0, 0, 0); padding: 10px 20px; border-radius: 10px; text-decoration: none;flex: 1;
+      <a style="color: rgb(0, 0, 0); padding: 10px 20px; border-radius: 10px; text-decoration: none; flex: 1;
       padding: 20px 40px;" href="StudentManagement.html">&nbsp;Student</a>
       <br><br>
       <li class="active">Add Student</li>
@@ -157,92 +154,49 @@
       <li>Settings</li>
     </ul>
   </div>
-  <section class="addsec">
-    
-  </section>
+
   <!-- Main Content -->
   <div class="main" style="margin-top: 4%;">
     <!-- Header -->
     <div class="header">
       <h1>Add New Student</h1>
       <div class="actions">
-        <a style="    background: #bfbfbf; position: relative; top: 2px;color: rgb(0, 0, 0);padding: 7px 16px;cursor: pointer;color: #333; border-radius: 5px;text-decoration: none;" href="faculty.html">Cancel</a>
-        <button class="save">Save Student</button>
+        <a style="background: #bfbfbf; position: relative; top: 2px; color: rgb(0, 0, 0); padding: 7px 16px; cursor: pointer; color: #333; border-radius: 5px; text-decoration: none;" href="faculty.html">Cancel</a>
+        <button class="save" id="saveBtn">Save Student</button>
       </div>
     </div>
 
     <!-- Profile Picture -->
     <div class="form-section">
       <h3>Profile Picture</h3>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Upload Button</title>
-  <style>
-    .upload-btn {
-      display: inline-block;
-      background-color: #28a745; /* green */
-      color: white;
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      text-align: center;
-    }
-
-    .upload-btn:hover {
-      background-color: #218838; /* darker green */
-    }
-
-    /* Hide the real file input */
-    input[type="file"] {
-      display: none;
-    }
-  </style>
-</head>
-<body>
-  <form>
-    <label for="file-upload" class="upload-btn">Upload</label>
-    <input id="file-upload" type="file" />
-  </form>
-
-  <script>
-    document.getElementById("file-upload").addEventListener("change", function() {
-      if (this.files.length > 0) {
-        alert("You selected: " + this.files[0].name);
-      }
-    });
-  </script>
-</body>
-</html>
-
+      <form>
+        <label for="file-upload" class="upload-btn">Upload</label>
+        <input id="file-upload" type="file" />
+      </form>
     </div>
 
     <!-- Basic Info -->
     <div class="form-section">
       <h3>Basic Information</h3>
       <div class="form-group">
-        <input type="text" placeholder="First Name *">
-        <input type="text" placeholder="Last Name *">
+        <input type="text" id="firstName" placeholder="First Name *">
+        <input type="text" id="lastName" placeholder="Last Name *">
       </div>
       <div class="form-group">
-        <input type="email" placeholder="Email Address *">
-        <input type="text" placeholder="Phone Number *">
+        <input type="email" id="email" placeholder="Email Address *">
+        <input type="text" id="phone" placeholder="Phone Number *">
       </div>
       <div class="form-group">
-        <input type="date" placeholder="Date of Birth">
-        <select>
+        <input type="date" id="dob">
+        <select id="grade">
           <option>Select grade</option>
           <option>11th Grade</option>
           <option>12th Grade</option>
         </select>
       </div>
       <div class="form-group">
-        <input type="number" placeholder="GPA">
-        <select>
+        <input type="number" id="gpa" placeholder="GPA">
+        <select id="status">
           <option>Status</option>
           <option>Active</option>
           <option>Inactive</option>
@@ -254,59 +208,107 @@
     <div class="form-section">
       <h3>Contact Information</h3>
       <div class="form-group">
-        <input type="text" placeholder="Address *" style="flex:100%;">
+        <input type="text" id="address" placeholder="Address *" style="flex:100%;">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Emergency Contact (Name - Phone)">
+        <input type="text" id="emergency" placeholder="Emergency Contact (Name - Phone)">
       </div>
       <div class="form-group">
-        <input type="date" value="2025-09-12">
+        <input type="date" id="admissionDate" value="2025-09-12">
       </div>
     </div>
 
     <!-- Subjects -->
     <div class="form-section">
       <h3>Subjects</h3>
-      <div class="checkbox-group">
-        <label><input type="checkbox"> Mathematics</label>
-        <label><input type="checkbox"> Physics</label>
-        <label><input type="checkbox"> Chemistry</label>
-        <label><input type="checkbox"> Biology</label>
-        <label><input type="checkbox"> English Literature</label>
-        <label><input type="checkbox"> History</label>
-        <label><input type="checkbox"> Geography</label>
-        <label><input type="checkbox"> Computer Science</label>
-        <label><input type="checkbox"> Art</label>
-        <label><input type="checkbox"> Music</label>
-        <label><input type="checkbox"> Physical Education</label>
-        <label><input type="checkbox"> Spanish</label>
-        <label><input type="checkbox"> French</label>
-        <label><input type="checkbox"> Economics</label>
+      <div class="checkbox-group" id="subjects">
+        <label><input type="checkbox" value="Mathematics"> Mathematics</label>
+        <label><input type="checkbox" value="Physics"> Physics</label>
+        <label><input type="checkbox" value="Chemistry"> Chemistry</label>
+        <label><input type="checkbox" value="Biology"> Biology</label>
+        <label><input type="checkbox" value="English Literature"> English Literature</label>
+        <label><input type="checkbox" value="History"> History</label>
+        <label><input type="checkbox" value="Geography"> Geography</label>
+        <label><input type="checkbox" value="Computer Science"> Computer Science</label>
+        <label><input type="checkbox" value="Art"> Art</label>
+        <label><input type="checkbox" value="Music"> Music</label>
+        <label><input type="checkbox" value="Physical Education"> Physical Education</label>
+        <label><input type="checkbox" value="Spanish"> Spanish</label>
+        <label><input type="checkbox" value="French"> French</label>
+        <label><input type="checkbox" value="Economics"> Economics</label>
       </div>
     </div>
 
     <!-- Activities -->
     <div class="form-section">
       <h3>Extracurricular Activities</h3>
-      <div class="checkbox-group">
-        <label><input type="checkbox"> Student Council</label>
-        <label><input type="checkbox"> Science Club</label>
-        <label><input type="checkbox"> Debate Team</label>
-        <label><input type="checkbox"> Robotics Club</label>
-        <label><input type="checkbox"> Chess Club</label>
-        <label><input type="checkbox"> Basketball Team</label>
-        <label><input type="checkbox"> Soccer Team</label>
-        <label><input type="checkbox"> Volleyball Team</label>
-        <label><input type="checkbox"> Drama Club</label>
-        <label><input type="checkbox"> Band</label>
-        <label><input type="checkbox"> National Honor Society</label>
-        <label><input type="checkbox"> Math Olympiad</label>
-        <label><input type="checkbox"> Coding Club</label>
-        <label><input type="checkbox"> Model UN</label>
-        <label><input type="checkbox"> Newspaper Club</label>
+      <div class="checkbox-group" id="activities">
+        <label><input type="checkbox" value="Student Council"> Student Council</label>
+        <label><input type="checkbox" value="Science Club"> Science Club</label>
+        <label><input type="checkbox" value="Debate Team"> Debate Team</label>
+        <label><input type="checkbox" value="Robotics Club"> Robotics Club</label>
+        <label><input type="checkbox" value="Chess Club"> Chess Club</label>
+        <label><input type="checkbox" value="Basketball Team"> Basketball Team</label>
+        <label><input type="checkbox" value="Soccer Team"> Soccer Team</label>
+        <label><input type="checkbox" value="Volleyball Team"> Volleyball Team</label>
+        <label><input type="checkbox" value="Drama Club"> Drama Club</label>
+        <label><input type="checkbox" value="Band"> Band</label>
+        <label><input type="checkbox" value="National Honor Society"> National Honor Society</label>
+        <label><input type="checkbox" value="Math Olympiad"> Math Olympiad</label>
+        <label><input type="checkbox" value="Coding Club"> Coding Club</label>
+        <label><input type="checkbox" value="Model UN"> Model UN</label>
+        <label><input type="checkbox" value="Newspaper Club"> Newspaper Club</label>
       </div>
     </div>
   </div>
 
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyA9C1j6rc8QicmusZ3_tTlCMxfnqaXuYrg",
+    authDomain: "hackathon-24389.firebaseapp.com",
+    databaseURL: "https://hackathon-24389-default-rtdb.asia-southeast1.firebasedatabase.app/",
+    projectId: "hackathon-24389",
+    storageBucket: "hackathon-24389.firebasestorage.app",
+    messagingSenderId: "223352153020",
+    appId: "1:223352153020:web:4033ee61bbd488830e81b9",
+    measurementId: "G-LVG5GVVE91"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  document.getElementById("saveBtn").addEventListener("click", function () {
+    const subjects = Array.from(document.querySelectorAll("#subjects input:checked")).map(cb => cb.value);
+    const activities = Array.from(document.querySelectorAll("#activities input:checked")).map(cb => cb.value);
+
+    const studentData = {
+      firstName: document.getElementById("firstName").value,
+      lastName: document.getElementById("lastName").value,
+      email: document.getElementById("email").value,
+      phone: document.getElementById("phone").value,
+      dob: document.getElementById("dob").value,
+      grade: document.getElementById("grade").value,
+      gpa: document.getElementById("gpa").value,
+      status: document.getElementById("status").value,
+      address: document.getElementById("address").value,
+      emergency: document.getElementById("emergency").value,
+      admissionDate: document.getElementById("admissionDate").value,
+      subjects: subjects,
+      activities: activities
+    };
+
+    push(ref(db, "students"), studentData)
+      .then(() => {
+        alert("Student saved successfully!");
+      })
+      .catch((err) => {
+        alert("Error: " + err.message);
+      });
+  });
+</script>
 </body>
 </html>
