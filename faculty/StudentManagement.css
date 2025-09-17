@@ -14,55 +14,65 @@ body {
 }
 
 /* Sidebar */
-    .sidebar {
-      width: 240px;
-      background: linear-gradient(180deg, #1e3a8a, #2563eb);
-      color: white;
-      height: 100vh;
-      padding: 20px 0;
-      box-shadow: 2px 0 8px rgba(0,0,0,0.1);
-      position: fixed;
-      top: 60px;
-      left: 0;
-    }
-    .sidebar h2 {
-      font-size: 22px;
-      font-weight: 600;
-      margin-left: 20px;
-      margin-bottom: 25px;
-    }
-    .menu {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .menu li, .menu a {
-      display: block;
-      padding: 12px 20px;
-      cursor: pointer;
-      color: #e0e7ff;
-      font-weight: 500;
-      text-decoration: none;
-      border-left: 4px solid transparent;
-      transition: 0.2s;
-    }
-    .menu li:hover, .menu a:hover {
-      background: rgba(255,255,255,0.15);
-      color: #fff;
-    }
-    .menu li.active {
-      background: rgba(255,255,255,0.2);
-      border-left: 4px solid #facc15;
-      color: #fff;
-      font-weight: bold;
-    }
+.sidebar {
+  width: 240px;
+  background: linear-gradient(180deg, #1e3a8a, #2563eb);
+  color: white;
+  height: 100vh;
+  padding: 20px 0;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 60px;
+  left: 0;
+}
+
+.sidebar h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-left: 20px;
+  margin-bottom: 25px;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li,
+.menu a {
+  display: block;
+  padding: 12px 20px;
+  cursor: pointer;
+  color: #e0e7ff;
+  font-weight: 500;
+  text-decoration: none;
+  border-left: 4px solid transparent;
+  transition: 0.2s;
+}
+
+.menu li:hover,
+.menu a:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.menu li.active {
+  background: rgba(255, 255, 255, 0.2);
+  border-left: 4px solid #facc15;
+  color: #fff;
+  font-weight: bold;
+}
+
 
 
 /* Main Content */
 .main {
   flex: 1;
-  margin-left: 240px; /* matches sidebar */
-  margin-top: 60px; /* matches navbar */
+  margin-left: 240px;
+  /* matches sidebar */
+  margin-top: 60px;
+  /* matches navbar */
   padding: 25px 35px;
 }
 
@@ -142,14 +152,14 @@ body {
   background: #ffffff;
   border-radius: 12px;
   padding: 20px 24px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   border-left: 6px solid #2563eb;
   transition: 0.2s;
 }
 
 .student-detail:hover {
   transform: translateY(-3px);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 .student-detail h3 {
