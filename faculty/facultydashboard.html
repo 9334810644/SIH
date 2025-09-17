@@ -6,64 +6,116 @@
   <title>Faculty Dashboard</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f6f9;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f9fafb;
       margin: 0;
       padding: 0;
+      color: #111827;
     }
     header {
-      background: #2c3e50;
+      background: #1f2937;
       color: white;
-      padding: 15px;
+      padding: 18px;
       text-align: center;
+      font-size: 22px;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
     .container {
-      width: 80%;
-      margin: 20px auto;
+      width: 90%;
+      max-width: 1000px;
+      margin: 30px auto;
       background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
     }
     h2 {
       margin-bottom: 20px;
-      color: #333;
+      font-size: 20px;
+      font-weight: 600;
+      color: #374151;
+      border-bottom: 2px solid #f3f4f6;
+      padding-bottom: 8px;
     }
     .student-card {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px;
-      border-bottom: 1px solid #eee;
+      padding: 15px 12px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      background: #f9fafb;
+      transition: 0.2s;
     }
-    .student-card:last-child {
-      border-bottom: none;
+    .student-card:hover {
+      background: #f3f4f6;
+    }
+    .student-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .student-info strong {
+      font-size: 16px;
+      color: #111827;
+    }
+    .student-info small {
+      font-size: 14px;
+      color: #6b7280;
+    }
+    .badge {
+      background: #fbbf24;
+      color: #fff;
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      margin-top: 4px;
+      display: inline-block;
+      width: fit-content;
+    }
+    .actions {
+      display: flex;
+      gap: 10px;
     }
     .btn {
-      padding: 6px 12px;
-      margin-left: 5px;
+      padding: 8px 14px;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
       cursor: pointer;
       color: white;
+      font-weight: 500;
+      transition: 0.2s;
     }
     .approve {
-      background: #27ae60;
+      background: #16a34a;
+    }
+    .approve:hover {
+      background: #15803d;
     }
     .reject {
-      background: #e74c3c;
+      background: #dc2626;
+    }
+    .reject:hover {
+      background: #b91c1c;
+    }
+    .empty {
+      text-align: center;
+      padding: 30px;
+      font-size: 16px;
+      color: #6b7280;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Faculty Dashboard</h1>
+    Faculty Dashboard
   </header>
 
   <div class="container">
     <h2>Pending Student Approvals</h2>
     <div id="pendingList">
-      <!-- Students will load here -->
+      <p class="empty">Loading students...</p>
     </div>
   </div>
 
@@ -88,12 +140,12 @@
     const pendingList = document.getElementById("pendingList");
 
     async function loadPendingStudents() {
-      pendingList.innerHTML = "<p>Loading...</p>";
+      pendingList.innerHTML = "<p class='empty'>Loading students...</p>";
       const q = query(collection(db, "users"), where("role", "==", "Student"), where("status", "==", "Pending"));
       const snapshot = await getDocs(q);
 
       if (snapshot.empty) {
-        pendingList.innerHTML = "<p>No pending students 🎉</p>";
+        pendingList.innerHTML = "<p class='empty'>No pending students 🎉</p>";
         return;
       }
 
@@ -105,21 +157,23 @@
         const card = document.createElement("div");
         card.className = "student-card";
         card.innerHTML = `
-          <span><strong>${student.fullname}</strong> (${student.email})</span>
-          <div>
+          <div class="student-info">
+            <strong>${student.fullname}</strong>
+            <small>${student.email}</small>
+            <span class="badge">Pending</span>
+          </div>
+          <div class="actions">
             <button class="btn approve">Approve</button>
             <button class="btn reject">Reject</button>
           </div>
         `;
 
-        // Approve student
         card.querySelector(".approve").addEventListener("click", async () => {
           await updateDoc(doc(db, "users", studentId), { status: "Approved" });
           alert(`${student.fullname} approved ✅`);
           loadPendingStudents();
         });
 
-        // Reject student
         card.querySelector(".reject").addEventListener("click", async () => {
           await updateDoc(doc(db, "users", studentId), { status: "Rejected" });
           alert(`${student.fullname} rejected ❌`);
