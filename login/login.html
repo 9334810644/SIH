@@ -19,7 +19,7 @@
 
     <div class="extra-links">
       <p>Don’t have an account? <a href="register.html">Sign Up</a></p>
-      <p><a href="forgot-password.html">Forgot Password?</a></p>
+      <p><a href="forgot password.html">Forgot Password?</a></p>
     </div>
   </div>
 
@@ -61,7 +61,7 @@
 
         // 🔹 Admin check (direct login if email matches predefined list)
         if (ADMIN_EMAILS.includes(email)) {
-          window.location.href = "admin.html";
+          window.location.href = "admin/admin.html";
           return;
         }
 
@@ -82,7 +82,7 @@
         // 🔹 Redirect based on role
         if (role === "Student") {
           if (status === "Approved") {
-            window.location.href = "home2.html"; // student dashboard
+            window.location.href = "home/home2.html"; // student dashboard
           } else {
             alert("⚠️ Your student account is pending faculty approval.");
             await signOut(auth);
@@ -90,7 +90,7 @@
         } 
        else if (role === "Faculty") {
   if (status === "Approved") {
-    window.location.href = "home.html";  // Faculty Dashboard
+    window.location.href = "/home/home.html";  // Faculty Dashboard
   } else {
     // Instead of auto login → block & notify
     alert("⚠️ Your faculty account is pending admin approval.");
