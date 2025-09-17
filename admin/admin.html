@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">👑 Admin Dashboard</div>
+    <ul class="nav-links">
+      <li><a href="#">Dashboard</a></li>
+      <li><a href="#">Faculty</a></li>
+      <li><a href="#">Students</a></li>
+      <li><a href="#" id="logoutBtn" class="logout">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <h1>Welcome, Admin</h1>
+    <p>Manage faculty approvals and student requests efficiently</p>
+  </header>
+
+  <!-- Dashboard Section -->
+  <section class="dashboard">
+    <div class="card">
+      <h2>📘 Pending Faculty Approvals</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="facultyList">
+          <!-- Faculty rows will load here -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Firebase JS -->
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faculty Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    .container {
+      width: 80%;
+      margin: 20px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .student-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+    }
+    .student-card:last-child {
+      border-bottom: none;
+    }
+    .btn {
+      padding: 6px 12px;
+      margin-left: 5px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+    }
+    .approve {
+      background: #27ae60;
+    }
+    .reject {
+      background: #e74c3c;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Faculty Dashboard</h1>
+  </header>
+
+  <div class="container">
+    <h2>Pending Student Approvals</h2>
+    <div id="pendingList">
+      <!-- Students will load here -->
+    </div>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, getDocs, updateDoc, doc, query, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA9C1j6rc8QicmusZ3_tTlCMxfnqaXuYrg",
+      authDomain: "hackathon-24389.firebaseapp.com",
+      projectId: "hackathon-24389",
+      storageBucket: "hackathon-24389.firebasestorage.app",
+      messagingSenderId: "223352153020",
+      appId: "1:223352153020:web:4033ee61bbd488830e81b9",
+      measurementId: "G-LVG5GVVE91"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const pendingList = document.getElementById("pendingList");
+
+    async function loadPendingStudents() {
+      pendingList.innerHTML = "<p>Loading...</p>";
+      const q = query(collection(db, "users"), where("role", "==", "Student"), where("status", "==", "Pending"));
+      const snapshot = await getDocs(q);
+
+      if (snapshot.empty) {
+        pendingList.innerHTML = "<p>No pending students 🎉</p>";
+        return;
+      }
+
+      pendingList.innerHTML = "";
+      snapshot.forEach(docSnap => {
+        const student = docSnap.data();
+        const studentId = docSnap.id;
+
+        const card = document.createElement("div");
+        card.className = "student-card";
+        card.innerHTML = `
+          <span><strong>${student.fullname}</strong> (${student.email})</span>
+          <div>
+            <button class="btn approve">Approve</button>
+            <button class="btn reject">Reject</button>
+          </div>
+        `;
+
+        // Approve student
+        card.querySelector(".approve").addEventListener("click", async () => {
+          await updateDoc(doc(db, "users", studentId), { status: "Approved" });
+          alert(`${student.fullname} approved ✅`);
+          loadPendingStudents();
+        });
+
+        // Reject student
+        card.querySelector(".reject").addEventListener("click", async () => {
+          await updateDoc(doc(db, "users", studentId), { status: "Rejected" });
+          alert(`${student.fullname} rejected ❌`);
+          loadPendingStudents();
+        });
+
+        pendingList.appendChild(card);
+      });
+    }
+
+    loadPendingStudents();
+  </script>
+</body>
+</html>

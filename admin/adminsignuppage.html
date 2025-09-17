@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Signup</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="admin-container">
+    <h2>👑 Admin Signup</h2>
+    <form id="adminSignupForm">
+      <input type="text" id="fullname" placeholder="Full Name" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Signup as Admin</button>
+    </form>
+    <p>Already an admin? <a href="admin.html">Login here</a></p>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA9C1j6rc8QicmusZ3_tTlCMxfnqaXuYrg",
+      authDomain: "hackathon-24389.firebaseapp.com",
+      projectId: "hackathon-24389",
+      storageBucket: "hackathon-24389.appspot.com",
+      messagingSenderId: "223352153020",
+      appId: "1:223352153020:web:4033ee61bbd488830e81b9"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    document.getElementById("adminSignupForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const fullname = document.getElementById("fullname").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        await setDoc(doc(db, "users", user.uid), {
+          fullname,
+          email,
+          role: "Admin",
+          status: "Approved"
+        });
+
+        alert("✅ Admin account created successfully!");
+        window.location.href = "admin-login.html";
+      } catch (error) {
+        alert("❌ Error: " + error.message);
+      }
+    });
+  </script>
+</body>
+</html>
