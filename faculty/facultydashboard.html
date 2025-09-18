@@ -29,6 +29,11 @@
       padding: 25px;
       border-radius: 12px;
       box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      animation: fadeIn 0.6s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     h2 {
       margin-bottom: 20px;
@@ -47,10 +52,11 @@
       border-radius: 8px;
       margin-bottom: 12px;
       background: #f9fafb;
-      transition: 0.2s;
+      transition: transform 0.2s ease, background 0.2s;
     }
     .student-card:hover {
       background: #f3f4f6;
+      transform: scale(1.01);
     }
     .student-info {
       display: flex;
@@ -85,19 +91,21 @@
       cursor: pointer;
       color: white;
       font-weight: 500;
-      transition: 0.2s;
+      transition: transform 0.2s ease, background 0.2s ease;
     }
     .approve {
       background: #16a34a;
     }
     .approve:hover {
       background: #15803d;
+      transform: scale(1.05);
     }
     .reject {
       background: #dc2626;
     }
     .reject:hover {
       background: #b91c1c;
+      transform: scale(1.05);
     }
     .empty {
       text-align: center;
@@ -128,7 +136,7 @@
       apiKey: "AIzaSyA9C1j6rc8QicmusZ3_tTlCMxfnqaXuYrg",
       authDomain: "hackathon-24389.firebaseapp.com",
       projectId: "hackathon-24389",
-      storageBucket: "hackathon-24389.firebasestorage.app",
+      storageBucket: "hackathon-24389.appspot.com",
       messagingSenderId: "223352153020",
       appId: "1:223352153020:web:4033ee61bbd488830e81b9",
       measurementId: "G-LVG5GVVE91"
@@ -141,7 +149,14 @@
 
     async function loadPendingStudents() {
       pendingList.innerHTML = "<p class='empty'>Loading students...</p>";
-      const q = query(collection(db, "users"), where("role", "==", "Student"), where("status", "==", "Pending"));
+
+      // ✅ lowercase role & status (matches how you save in Firestore)
+      const q = query(
+        collection(db, "users"),
+        where("role", "==", "student"),
+        where("status", "==", "pending")
+      );
+
       const snapshot = await getDocs(q);
 
       if (snapshot.empty) {
@@ -169,13 +184,13 @@
         `;
 
         card.querySelector(".approve").addEventListener("click", async () => {
-          await updateDoc(doc(db, "users", studentId), { status: "Approved" });
+          await updateDoc(doc(db, "users", studentId), { status: "approved" });
           alert(`${student.fullname} approved ✅`);
           loadPendingStudents();
         });
 
         card.querySelector(".reject").addEventListener("click", async () => {
-          await updateDoc(doc(db, "users", studentId), { status: "Rejected" });
+          await updateDoc(doc(db, "users", studentId), { status: "rejected" });
           alert(`${student.fullname} rejected ❌`);
           loadPendingStudents();
         });
