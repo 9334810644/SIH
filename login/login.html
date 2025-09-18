@@ -25,94 +25,90 @@
 
   <!-- Firebase -->
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    // ✅ Firebase Config
-    const firebaseConfig = {
-      apiKey: "AIzaSyA9C1j6rc8QicmusZ3_tTlCMxfnqaXuYrg",
-      authDomain: "hackathon-24389.firebaseapp.com",
-      projectId: "hackathon-24389",
-      storageBucket: "hackathon-24389.appspot.com",
-      messagingSenderId: "223352153020",
-      appId: "1:223352153020:web:4033ee61bbd488830e81b9",
-      measurementId: "G-LVG5GVVE91"
-    };
+  const firebaseConfig = {
+    apiKey: "AIzaSyA9C1j6rc8QicmusZ3_tTlCMxfnqaXuYrg",
+    authDomain: "hackathon-24389.firebaseapp.com",
+    projectId: "hackathon-24389",
+    storageBucket: "hackathon-24389.appspot.com",
+    messagingSenderId: "223352153020",
+    appId: "1:223352153020:web:4033ee61bbd488830e81b9",
+    measurementId: "G-LVG5GVVE91"
+  };
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
 
-    // Predefined admin emails (secure way: store in Firestore instead of hardcoding)
-    const ADMIN_EMAILS = ["admin@gmail.com", "superadmin@portal.com"];
+  const ADMIN_EMAILS = ["admin@gmail.com", "superadmin@portal.com"];
 
-    document.getElementById("loginForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
+  document.getElementById("loginForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
 
-      try {
-        // 🔹 Login with Firebase Auth
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
 
-        // 🔹 Admin check (direct login if email matches predefined list)
-        if (ADMIN_EMAILS.includes(email)) {
-          window.location.href = "/admin/admin.html";
-          return;
-        }
-
-        // 🔹 Fetch user role & status from Firestore
-        const userDocRef = doc(db, "users", user.uid);
-        const userDoc = await getDoc(userDocRef);
-
-        if (!userDoc.exists()) {
-          alert("⚠️ User record not found.");
-          await signOut(auth);
-          return;
-        }
-
-        const userData = userDoc.data();
-        const role = userData.role;
-        const status = userData.status || "Pending";
-
-        // 🔹 Redirect based on role
-        if (role === "Student") {
-          if (status === "Approved") {
-            window.location.href = "home/home2.html"; // student dashboard
-          } else {
-            alert("⚠️ Your student account is pending faculty approval.");
-            await signOut(auth);
-          }
-        } 
-       else if (role === "Faculty") {
-  if (status === "Approved") {
-    window.location.href = "/home/home.html";  // Faculty Dashboard
-  } else {
-    // Instead of auto login → block & notify
-    alert("⚠️ Your faculty account is pending admin approval.");
-    await signOut(auth);
-  }
-}
- 
-        else {
-          alert("⚠️ Unknown role. Contact admin.");
-          await signOut(auth);
-        }
-
-      } catch (error) {
-        let errorMessage = "An unknown error occurred. Please try again.";
-        if (error.code === "auth/wrong-password" || error.code === "auth/user-not-found") {
-          errorMessage = "Incorrect email or password.";
-        } else if (error.code === "auth/too-many-requests") {
-          errorMessage = "Too many failed attempts. Try later.";
-        }
-        alert("❌ " + errorMessage);
+      if (ADMIN_EMAILS.includes(email)) {
+        window.location.href = "/admin/admin.html";
+        return;
       }
-    });
-  </script>
+
+      const userDocRef = doc(db, "users", user.uid);
+      const userDoc = await getDoc(userDocRef);
+
+      if (!userDoc.exists()) {
+        alert("⚠️ User record not found.");
+        await signOut(auth);
+        return;
+      }
+
+      const userData = userDoc.data();
+      const role = (userData.role || "").toLowerCase();
+      const status = (userData.status || "").toLowerCase();
+
+      // 🔎 Debugging Logs
+      console.log("Fetched user data:", userData);
+      console.log("Role from DB:", role);
+      console.log("Status from DB:", status);
+
+      if (role === "student") {
+        if (status === "approved") {
+          window.location.href = "home/home2.html";
+        } else {
+          alert("⚠️ Your student account is pending faculty approval.");
+          await signOut(auth);
+        }
+      } else if (role === "faculty") {
+        if (status === "approved") {
+          window.location.href = "/home/home.html";
+        } else {
+          alert("⚠️ Your faculty account is pending admin approval.");
+          await signOut(auth);
+        }
+      } else {
+        alert("⚠️ Unknown role. Contact admin.");
+        await signOut(auth);
+      }
+
+    } catch (error) {
+      let errorMessage = "An unknown error occurred. Please try again.";
+      if (error.code === "auth/wrong-password" || error.code === "auth/user-not-found") {
+        errorMessage = "Incorrect email or password.";
+      } else if (error.code === "auth/too-many-requests") {
+        errorMessage = "Too many failed attempts. Try later.";
+      }
+      alert("❌ " + errorMessage);
+    }
+  });
+</script>
+
+
 </body>
 </html>

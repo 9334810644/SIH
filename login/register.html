@@ -114,14 +114,15 @@
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        // If student → Pending, If faculty → Approved
-        let status = (role === "Faculty") ? "Approved" : "Pending";
+        // ✅ Normalize to lowercase
+        const normalizedRole = role.toLowerCase();
+        let status = (normalizedRole === "faculty") ? "approved" : "pending";
 
         await setDoc(doc(db, "users", user.uid), {
           fullname,
           email,
-          role,
-          status, // ✅ approval system
+          role: normalizedRole,   // "student" / "faculty"
+          status,                 // "approved" / "pending"
           createdAt: new Date()
         });
 
